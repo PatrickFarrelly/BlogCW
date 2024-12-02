@@ -1,0 +1,25 @@
+{% extends "blogs/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-light rounded p-4 text-center">
+                <h1 class="mb-4">Are you sure you want to delete "{{ blog.blog_name }}"?</h1>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <!-- Yes, delete button -->
+                        <button type="submit" class="btn btn-danger btn-lg">Yes, delete</button>
+                    </div>
+                    <div>
+                        <!-- Cancel link -->
+                        <a href="{% url 'view_blog' blog.id %}" class="btn btn-secondary btn-lg">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

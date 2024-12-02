@@ -1,0 +1,18 @@
+{% extends "blogs/base.html" %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card p-4 shadow-lg" style="width: 400px;">
+        <h2 class="text-center mb-4">Register</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </div>
+        </form>
+        <p class="text-center mt-3">
+            Already have an account? <a href="{% url 'login' %}">Login here</a>.
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "blogs/base.html" %}
+
+{% block content %}
+<!-- Using Bootstrap 4 (included CDN) for consistent styling -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6"> <!-- Adjusted to a smaller column width to match the Create Blog form -->
+            <!-- Card container with shadow and padding for a cleaner look -->
+            <div class="card shadow-lg border-light rounded p-4">
+                <h2 class="text-center text-primary mb-4">Update Blog</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <!-- Blog Name Field -->
+                    <div class="form-group mb-3">
+                        <label for="blog_name" class="font-weight-bold">Blog Name</label>
+                        <input type="text" id="blog_name" name="blog_name" value="{{ blog.blog_name }}" class="form-control" required>
+                    </div>
+
+                    <!-- Blog Description Field -->
+                    <div class="form-group mb-3">
+                        <label for="blog_description" class="font-weight-bold">Blog Description</label>
+                        <textarea id="blog_description" name="blog_description" class="form-control" rows="4" required>{{ blog.blog_description }}</textarea>
+                    </div>
+
+                    <!-- Blog Image Field -->
+                    <div class="form-group mb-3">
+                        <label for="blog_image" class="font-weight-bold">Blog Image</label>
+                        <input type="file" id="blog_image" name="blog_image" class="form-control">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Update Blog</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

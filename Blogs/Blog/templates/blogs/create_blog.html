@@ -1,0 +1,44 @@
+{% extends "blogs/base.html" %}
+
+{% block content %}
+<!-- Using Bootstrap 4 for consistent styling -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6"> <!-- Adjusted to match the width of the Update Blog form -->
+            <!-- Card container with shadow and padding for a cleaner look -->
+            <div class="card shadow-lg border-light rounded p-4">
+                <h2 class="text-center text-primary mb-4">Create Blog</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <!-- Blog Name Field -->
+                    <div class="form-group mb-3">
+                        <label for="blog_name" class="font-weight-bold">Blog Name</label>
+                        {{ form.blog_name }} <!-- Render the Blog Name field -->
+                    </div>
+
+                    <!-- Blog Description Field -->
+                    <div class="form-group mb-3">
+                        <label for="blog_description" class="font-weight-bold">Blog Description</label>
+                        {{ form.blog_description }} <!-- Render the Blog Description field -->
+                    </div>
+
+                    <!-- Blog Image Field -->
+                    <div class="form-group mb-3">
+                        <label for="blog_image" class="font-weight-bold">Blog Image</label>
+                        {{ form.blog_image }} <!-- Render the Blog Image field -->
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Create Blog</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,104 @@
+{% extends "blogs/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Top Section: My Blog text aligned to the left, buttons aligned to the right -->
+    <div class="row justify-content-between">
+        <!-- Blog Title aligned to the left -->
+        <div class="col-auto">
+            <h2 class="text-primary">{{ blog.blog_name }}</h2>
+        </div>
+
+        <!-- Edit and Delete Buttons aligned to the right -->
+        {% if user == blog.author %}
+            <div class="col-auto text-right">
+                <a href="{% url 'update_blog' blog.id %}" class="btn btn-warning btn-sm">
+                    <i class="bi bi-pen"></i> Edit Blog
+                </a>
+                <a href="{% url 'delete_blog' blog.id %}" class="btn btn-danger btn-sm ml-2">
+                    <i class="bi bi-trash"></i> Delete Blog
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Blog Image (Slightly smaller, centered) -->
+    <div class="text-center mb-4">
+        {% if blog.blog_image %}
+            <!-- Use 'img-fluid' for responsiveness and 'w-50' to make the image slightly smaller -->
+            <img src="{{ blog.blog_image.url }}" alt="{{ blog.blog_name }}" class="img-fluid w-50 rounded shadow-lg">
+        {% else %}
+            <p class="text-muted">No image available.</p>
+        {% endif %}
+    </div>
+
+    <!-- Blog Description (Displayed below the image, centered) -->
+    <div class="text-center mb-4">
+        <p class="lead">{{ blog.blog_description }}</p>
+    </div>
+
+    <!-- Display Blog Created Date -->
+    <div class="text-center text-muted mb-4">
+        <p>Posted on {{ blog.created_at|date:"F j, Y, g:i a" }}</p>
+    </div>
+
+    <hr>
+
+    <!-- Comments Section -->
+    <h4 class="text-center mb-4">Comments</h4>
+    <div class="comments-section">
+        {% if comments %}
+            <ul class="list-unstyled">
+                {% for comment in comments %}
+                    <li class="mb-4 p-3 border rounded shadow-sm">
+                        <strong class="text-dark">{{ comment.author.username }}</strong>: 
+                        <span class="comment-text">{{ comment.text }}</span>
+                        <!-- Display comment created date -->
+                        <p class="text-muted mt-2" style="font-size: 0.9rem;">
+                            Posted on {{ comment.created_at|date:"F j, Y, g:i a" }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted">No comments yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Comment Form -->
+    {% if user.is_authenticated %}
+        <h5 class="text-center mb-4">Leave a Comment</h5>
+        <div class="text-center">
+            <form method="post" class="w-75 mx-auto">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}  <!-- Use 'form' instead of 'comment_form' -->
+                </div>
+                <button type="submit" class="btn btn-success btn-lg">Post Comment</button>
+            </form>
+        </div>
+    {% else %}
+        <p class="text-center text-muted">You must be logged in to comment.</p>
+    {% endif %}
+</div>
+
+<!-- Add custom CSS to ensure comment text wraps properly -->
+<style>
+    .comment-text {
+        word-wrap: break-word;  /* Ensure long comments wrap to a new line */
+        white-space: pre-wrap;  /* Handle line breaks correctly */
+        word-break: break-word; /* Break words that are too long */
+    }
+
+    .comments-section li {
+        font-size: 1.1rem;  /* Slightly larger font size for comments */
+        line-height: 1.6;  /* Increase line height for better readability */
+    }
+
+    .comments-section p {
+        font-size: 1.1rem;
+        color: #888;
+    }
+</style>
+
+{% endblock %}
