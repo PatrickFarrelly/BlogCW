@@ -25,7 +25,7 @@ Ensure you have the following installed:
 
 ## Installation
 
-Follow the steps below to set up the project locally.
+Follow the steps below to set up the project locally. However if you already have the code you may skip the step of cloning the repository and also setting up a virtual environment is entirely optional.
 
 ### Step 1: Clone the Repository
 
@@ -67,6 +67,7 @@ pip install -r requirements.txt
 ### Step 6: Apply Database Migrations
 
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
 ### Step 7: Create a Superuser
@@ -82,6 +83,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 Visit the app in your browser at http://127.0.0.1:8000/.
+To view a blog and the comments on it a user must click on the name of the blog post
 
 ### Project Structure
 Below is an overview of the project structure:
