@@ -84,6 +84,8 @@ python manage.py runserver
 ```
 Visit the app in your browser at http://127.0.0.1:8000/.
 
+Once you are taken to the site a user can click on the register button in the top right of the navigation bar to create an account. After that you must go to the Login page and input your username and password and you will be taken to the homepage where blogs can be posted.
+
 To view a blog and the comments on it a user must click on the name of the blog post
 
 ### Project Structure
