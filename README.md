@@ -83,6 +83,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 Visit the app in your browser at http://127.0.0.1:8000/.
+
 To view a blog and the comments on it a user must click on the name of the blog post
 
 ### Project Structure
